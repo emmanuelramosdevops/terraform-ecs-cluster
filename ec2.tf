@@ -20,7 +20,7 @@ resource "aws_security_group" "service_security_group" {
 }
 
 resource "aws_alb" "application_load_balancer" {
-  name               = "${var.app_name}-${var.app_environment}-alb"
+  name               = "${var.project}-${var.environment}-alb"
   internal           = false
   load_balancer_type = "application"
   subnets            = aws_subnet.public.*.id
@@ -51,7 +51,7 @@ resource "aws_security_group" "load_balancer_security_group" {
 }
 
 resource "aws_lb_target_group" "target_group" {
-  name        = "${var.app_name}-${var.app_environment}-tg"
+  name        = "${var.project}-${var.environment}-tg"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
